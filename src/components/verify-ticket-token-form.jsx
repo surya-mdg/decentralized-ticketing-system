@@ -35,7 +35,7 @@ const VerifyTicketTokenForm = () => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="seatNumber"
+            name="token"
             render={({ field }) => (
               <FormItem>
                 <FormLabel> Token </FormLabel>
