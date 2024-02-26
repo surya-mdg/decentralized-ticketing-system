@@ -1,4 +1,4 @@
-import SeatingSvg from "./seating-svg";
+import SeatingSvg from "@/components/seating-svg";
 
 const BookImageSvg = ({ seatPosition }) => {
   return (

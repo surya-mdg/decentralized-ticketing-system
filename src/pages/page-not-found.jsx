@@ -1,7 +1,6 @@
-import React from "react";
-import { Button } from "../components/ui/button";
 import { LoaderIcon } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 const PageNotFound = () => {
   return (
     <div className=" w-full min-h-screen  flex justify-center items-center">

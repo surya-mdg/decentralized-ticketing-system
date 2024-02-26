@@ -2,9 +2,9 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { BoxIcon } from "lucide-react";
 import { siteConfig } from "@/utils/site-config";
-import { useIsSiteScrolled } from "../hooks/Is-site-scrolled";
-import { cn } from "../lib/utils";
-import { ModeToggle } from "./mode-toggle";
+import { useIsSiteScrolled } from "@/hooks/Is-site-scrolled";
+import { cn } from "@/lib/utils";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Navbar = () => {
   const isScrolled = useIsSiteScrolled();
@@ -23,7 +23,7 @@ const Navbar = () => {
         </Link>
 
         <div className=" flex  space-x-6 ml-auto  mr-5">
-          <Link to={"/"}>
+          <Link to={"/verify-event"}>
             <Button variant={"ghost"}> verify </Button>
           </Link>
           <Link to={"/"}>

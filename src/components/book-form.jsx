@@ -1,7 +1,3 @@
-import { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,8 +16,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-import BookImageSvg from "./book-image-svg";
+import BookImageSvg from "@/components/book-image-svg";
 import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
@@ -29,7 +29,7 @@ const formSchema = z.object({
     .number()
     .min(1, " number of seats must be at least 1")
     .max(10, " number of seats can`t be greater then 10"),
-  seatPosition: z.string(),
+  seatPosition: z.string().min(1),
 });
 
 const BookForm = () => {

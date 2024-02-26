@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
 import { ArrowRightIcon } from "lucide-react";
 import { siteConfig } from "@/utils/site-config";
 

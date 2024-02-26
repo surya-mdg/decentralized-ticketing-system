@@ -10,7 +10,7 @@ import { ImageIcon } from "@radix-ui/react-icons";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
-const EventCard = () => {
+const VerifyTicketCard = () => {
   return (
     <Card className=" md:min-w-56 md:w-56 p-4  w-full  justify-center  items-center flex md:block">
       <CardContent className=" border aspect-video h-24  ">
@@ -23,8 +23,8 @@ const EventCard = () => {
           <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardFooter>
-          <Link to={"/book-event"}>
-            <Button size="sm"> Book Event </Button>
+          <Link to={"/verify-ticket"}>
+            <Button size="sm"> Verify </Button>
           </Link>
         </CardFooter>
       </div>
@@ -32,4 +32,4 @@ const EventCard = () => {
   );
 };
 
-export default EventCard;
+export default VerifyTicketCard;

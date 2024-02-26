@@ -2,15 +2,17 @@ import { useState } from "react";
 import { ethers } from "ethers";
 import { Web3Provider } from "@ethersproject/providers";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import abi from "./utils/Test.json";
+import abi from "@/utils/Test.json";
 import * as buffer from "buffer";
 
-import HomePage from "./pages/HomePage";
-import EventsPage from "./pages/users-pages/EventsPage";
-import RootLayout from "./Layouts/RootLayout";
-import PageNotFound from "./pages/page-not-found";
-import BookEvent from "./pages/users-pages/BookEvent";
-import BookedTicket from "./pages/users-pages/BookedTicket";
+import HomePage from "@/pages/HomePage";
+import EventsPage from "@/pages/users-pages/EventsPage";
+import RootLayout from "@/Layouts/RootLayout";
+import PageNotFound from "@/pages/page-not-found";
+import BookEvent from "@/pages/users-pages/BookEvent";
+import BookedTicket from "@/pages/users-pages/BookedTicket";
+import VerifyTicketEventPage from "@/pages/verify-ticket/VerifyTicketEventPage";
+import VerifyTIckTokenPage from "@/pages/VerifyTIckTokenPage";
 
 window.Buffer = buffer.Buffer;
 
@@ -66,7 +68,7 @@ function App() {
       const ticketContract = new ethers.Contract(
         contractAdd,
         contractAbi,
-        signer,
+        signer
       );
       setContract(ticketContract);
     } catch (error) {
@@ -84,10 +86,13 @@ function App() {
       <Routes>
         <Route element={<RootLayout />}>
           <Route path="/" element={<HomePage />} />
+          {/*  user event pages  */}
           <Route path="/events" element={<EventsPage />} />
           <Route path="/book-event" element={<BookEvent />} />
-          <Route path="/varify-event" element={<EventsPage />} />
           <Route path="/book/ticket" element={<BookedTicket />} />
+          {/*  verification  ticket pages  */}
+          <Route path="/verify-event" element={<VerifyTicketEventPage />} />
+          <Route path="/verify-ticket" element={<VerifyTIckTokenPage />} />
         </Route>
 
         <Route path="/*" element={<PageNotFound />} />

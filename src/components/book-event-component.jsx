@@ -1,4 +1,4 @@
-import BookForm from "./book-form";
+import BookForm from "@/components/book-form";
 import { Card } from "@/components/ui/card";
 
 const BookEventComponent = () => {
