@@ -8,6 +8,9 @@ import * as buffer from "buffer";
 import HomePage from "./pages/HomePage";
 import EventsPage from "./pages/users-pages/EventsPage";
 import RootLayout from "./Layouts/RootLayout";
+import PageNotFound from "./pages/page-not-found";
+import BookEvent from "./pages/users-pages/BookEvent";
+import BookedTicket from "./pages/users-pages/BookedTicket";
 
 window.Buffer = buffer.Buffer;
 
@@ -63,7 +66,7 @@ function App() {
       const ticketContract = new ethers.Contract(
         contractAdd,
         contractAbi,
-        signer
+        signer,
       );
       setContract(ticketContract);
     } catch (error) {
@@ -82,7 +85,12 @@ function App() {
         <Route element={<RootLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/events" element={<EventsPage />} />
+          <Route path="/book-event" element={<BookEvent />} />
+          <Route path="/varify-event" element={<EventsPage />} />
+          <Route path="/book/ticket" element={<BookedTicket />} />
         </Route>
+
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );

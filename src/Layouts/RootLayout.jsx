@@ -4,10 +4,9 @@ import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
   return (
-    
-    <div className=" bg-background text-foreground">
+    <div className=" bg-background text-foreground capitalize">
       <Navbar />
-      <main className=" flex justify-center items-center min-h-screen">
+      <main className="  min-h-screen">
         <Outlet />
       </main>
       <Footer />
