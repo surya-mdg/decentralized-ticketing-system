@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ethers } from "ethers";
 import { Web3Provider } from '@ethersproject/providers';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
@@ -19,6 +19,10 @@ function App() {
     const [account, setAccount] = useState("0x00000000000");
     const [contract, setContract] = useState({});
 
+    useEffect(() => {
+        findAuthorizedAccount();
+    }, []);
+
     const findAuthorizedAccount = async () => { //Gets authorized accounts
         const ethereum = getEthereumObject();
         
@@ -35,6 +39,7 @@ function App() {
                 requestAuthorization();
             }
             else{
+                console.log("Finished Setting");
                 setAccount(accounts[0]);
                 getContract(ethereum);
             }
@@ -50,6 +55,7 @@ function App() {
             console.log("requestAuthorization: Account authorization denied");
         }
         else{
+            console.log("Finished Setting");
             setAccount(accounts[0]);
             getContract(ethereum);
         }
@@ -81,3 +87,4 @@ function App() {
 }
 
 export default App
+
