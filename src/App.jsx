@@ -13,17 +13,20 @@ import BookEvent from "@/pages/users-pages/BookEvent";
 import BookedTicket from "@/pages/users-pages/BookedTicket";
 import VerifyTicketEventPage from "@/pages/verify-ticket/VerifyTicketEventPage";
 import VerifyTIckTokenPage from "@/pages/VerifyTIckTokenPage";
+import CheckTicket from "@/pages/users-pages/CheckTicket";
 
 window.Buffer = buffer.Buffer;
 
 const getEthereumObject = () => window.ethereum;
-const contractAdd = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const contractAdd = "0x2B574555158337Cd46d47c2Ca57E4698A1f04e70";
 const contractAbi = abi.abi;
 
 function App() {
   const [account, setAccount] = useState("0x00000000000");
   const [contract, setContract] = useState({});
-  const [event, setEvent] = useState({name: "", time: "", location: ""});
+  const [event, setEvent] = useState({tokenId: 0, name: "Concert", time: "19/05/2002", location: "Mysore", seat: "middle"});
+  const [ticket, setTicket] = useState({tokenId: 0, name: "Concert", time: "19/05/2002", location: "Mysore", seat: "middle"});
+  
 
   useEffect(() => {
     console.log(event);
@@ -76,7 +79,6 @@ function App() {
         signer
       );
       setContract(ticketContract);
-      //await ticketContract.mint("Hiello", 1709632346, 0, 0, 1);
       await testContract();
       console.log("App: Got contract");
     } catch (error) {
@@ -96,11 +98,12 @@ function App() {
           <Route path="/" element={<HomePage />} />
           {/*  user event pages  */}
           <Route path="/events" element={<EventsPage event={setEvent}/>} />
-          <Route path="/book-event" element={<BookEvent event={event}/>} />
-          <Route path="/book/ticket" element={<BookedTicket />} />
+          <Route path="/book-event" element={<BookEvent event={event} contract={contract} setEvent={setEvent}/>} />
+          <Route path="/book/ticket" element={<BookedTicket event={event} account={account}/>} />
           {/*  verification  ticket pages  */}
-          <Route path="/verify-event" element={<VerifyTicketEventPage />} />
-          <Route path="/verify-ticket" element={<VerifyTIckTokenPage />} />
+          <Route path="/verify-event" element={<VerifyTicketEventPage contract={contract} setTicket={setTicket}/>} />
+          <Route path="/verify-ticket" element={<VerifyTIckTokenPage event={ticket} account={account}/>} />
+          <Route path="/check-ticket" element={<CheckTicket contract={contract} setTicket={setTicket}/>} />
         </Route>
 
         <Route path="/*" element={<PageNotFound />} />

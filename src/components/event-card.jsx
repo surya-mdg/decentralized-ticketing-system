@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 const EventCard = (props) => {
     const setEvent = () => {
-        props.event({name: props.name, time: props.time, location: props.location});
+        props.event({tokenId: 0, name: props.name, time: props.time, location: props.location, seat: ""});
     }
 
     return (

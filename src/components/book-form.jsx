@@ -24,6 +24,7 @@ import { z } from "zod";
 import BookImageSvg from "@/components/book-image-svg";
 import { useNavigate } from "react-router-dom";
 
+
 const formSchema = z.object({
   seatNumber: z.coerce
     .number()
@@ -34,11 +35,12 @@ const formSchema = z.object({
 
 const BookForm = (props) => {
   const navigate = useNavigate();
+  const [isSubmitting, setSubmit] = useState(false);
   // Define your form.
 
-    const mintTicket = () => {
-        console.log("Event: " + props.event.location);
-    }
+
+
+
 
   const [seatPosition, setSeatPosition] = useState("middle");
   const form = useForm({
@@ -50,9 +52,18 @@ const BookForm = (props) => {
   });
 
   // Define a submit handler.
-  function onSubmit(values) {
+  async function onSubmit(values) {
+    setSubmit(true);
     console.log(values);
-    //navigate("/book/ticket");
+    let _event = props.event;
+    await props.contract.mint(props.event.name, props.event.time, props.event.location, 1729690174, 0, 0, 1);
+    console.log("NFT Minted");
+    let id = await props.contract.getTokenId();
+    console.log(_event.name + " " + _event.time + " " + _event.location);
+    props.setEvent({tokenId: id, name: _event.name, time: _event.time, location: _event.location, seat: seatPosition});
+    setSubmit(false);
+    if(!isSubmitting)
+        navigate("/book/ticket");
   }
 
   return (

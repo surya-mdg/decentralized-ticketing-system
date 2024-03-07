@@ -27,35 +27,29 @@ import { useNavigate } from "react-router-dom";
 const formSchema = z.object({
     tokenId: z.coerce
       .number()
-      .min(0, " tokenId must be at least 0"),
-    userId: z.string().min(1),
+      .min(0, " tokenId must be at least 0")
   });
 
-const VerifyTicketEventPage = (props) => {
+const CheckTicket = (props) => {
 
     const navigate = useNavigate();
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            tokenId: 0 , 
-            userId: ""
+            tokenId: 0
         },
       });
 
       async function onSubmit(values) {
         console.log(values);
         try{
-        let isVerified = await props.contract.verify(values.tokenId, values.userId);
-        if(isVerified){
             let metadata = await props.contract.getMetadata(values.tokenId);
-            console.log(metadata[3]);
             props.setTicket({tokenId: values.tokenId, name: metadata[1], time: metadata[2], location: metadata[3], seat: "middle"});
+            console.log(metadata);
             navigate("/verify-ticket");
+        }catch(error){
+            console.log("Get Metadata Error");
         }
-    } catch (error){
-        console.log("Verify Error");
-    }
-    
         
       }
 
@@ -80,23 +74,6 @@ const VerifyTicketEventPage = (props) => {
               </FormItem>
             )}
           />
-
-<FormField
-            control={form.control}
-            name="userId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>User Address </FormLabel>
-                <FormControl>
-                  <Input placeholder="user address " {...field} />
-                </FormControl>
-                <FormDescription>
-                  please enter the user address
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
           
           <Button type="submit" >Submit</Button>
         </form>
@@ -105,4 +82,4 @@ const VerifyTicketEventPage = (props) => {
   );
 };
 
-export default VerifyTicketEventPage;
+export default CheckTicket;

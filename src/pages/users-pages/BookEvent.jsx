@@ -17,7 +17,7 @@ const BookEvent = (props) => {
         </div>
         <Separator className=" bg-muted h-0.5" />
       </div>
-      <BookEventComponent event={props.event}/>
+      <BookEventComponent event={props.event} contract={props.contract} setEvent={props.setEvent}/>
     </>
   );
 };

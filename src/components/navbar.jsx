@@ -5,15 +5,13 @@ import { siteConfig } from "@/utils/site-config";
 import { useIsSiteScrolled } from "@/hooks/Is-site-scrolled";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/mode-toggle";
+import { ethers } from "ethers";
 
 const Navbar = (props) => {
     const login =  () => {
         props.login();
     }
 
-    const verify = async () => {
-        await props.contract.mint("Hiello", 1709632346, 0, 0, 1);
-    }
   const isScrolled = useIsSiteScrolled();
   return (
         <>
@@ -30,8 +28,11 @@ const Navbar = (props) => {
         </Link>
 
         <div className=" flex  space-x-6 ml-auto  mr-5">
+        <Link to={"/check-ticket"}>
+            <Button variant={"ghost"}> check </Button>
+          </Link>
           <Link to={"/verify-event"}>
-            <Button variant={"ghost"} onClick={verify}> verify </Button>
+            <Button variant={"ghost"}> verify </Button>
           </Link>
           <Link to={"/"}>
             <Button variant={"ghost"} onClick={login}> login </Button>
