@@ -12,13 +12,24 @@ import { Button } from "@/components/ui/button";
 
 const EventCard = (props) => {
     const setEvent = () => {
-        props.event({tokenId: 0, name: props.name, time: props.time, location: props.location, seat: ""});
+        props.event({tokenId: 0, name: props.name, time: props.time, location: props.location, seat: "", type: props.type});
+    }
+
+    const bookString = () => {
+        switch(props.type){
+            case 1:
+                return "Book*";
+            case 2:
+                return "Book**";
+            default:
+                return "Book";
+        }
     }
 
     return (
     <Card className=" md:min-w-56 md:w-56 p-4  w-full  justify-center  items-center flex md:block">
         <CardContent className=" border aspect-video h-24 p-0 m-0 ">
-            <img src={props.img} alt="Header" className="w-full h-full object-cover" />
+            <img src={props.img} alt="Header" className="w-full h-full object-cover"/>
         </CardContent>
 
         <div>
@@ -31,7 +42,7 @@ const EventCard = (props) => {
             </CardContent>  
             <CardFooter className="flex items-center justify-center">
             <Link to={"/book-event"} >
-                <Button size="sm" onClick={setEvent}> Book</Button>
+                <Button size="sm" onClick={setEvent}>{bookString()}</Button>
             </Link>
             </CardFooter>
         </div>

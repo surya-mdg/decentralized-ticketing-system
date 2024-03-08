@@ -54,6 +54,8 @@ const VerifyTicketEventPage = (props) => {
             props.setTicket({tokenId: values.tokenId, name: metadata[1], time: metadata[2], location: metadata[3], seat: "middle"});
             navigate("/verify-ticket");
         }
+        else
+            throw error;
     } catch (error){
         toast({
             variant: "destructive",
