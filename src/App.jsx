@@ -18,14 +18,15 @@ import CheckTicket from "@/pages/users-pages/CheckTicket";
 window.Buffer = buffer.Buffer;
 
 const getEthereumObject = () => window.ethereum;
-const contractAdd = "0x2B574555158337Cd46d47c2Ca57E4698A1f04e70";
+const contractAdd = "0x700b6A60ce7EaaEA56F065753d8dcB9653dbAD35";
 const contractAbi = abi.abi;
 
 function App() {
   const [account, setAccount] = useState("0x00000000000");
   const [contract, setContract] = useState({});
-  const [event, setEvent] = useState({tokenId: 0, name: "Concert", time: "19/05/2002", location: "Mysore", seat: "middle"});
-  const [ticket, setTicket] = useState({tokenId: 0, name: "Concert", time: "19/05/2002", location: "Mysore", seat: "middle"});
+  const [event, setEvent] = useState({tokenId: 0, name: "Harmony Haven Live", time: "15:00 | 19/09/2024", location: "Neon Nights Club, Brickton", seat: "middle"});
+  const [ticket, setTicket] = useState({tokenId: 0, name: "Harmony Haven Live", time: "15:00 | 19/09/2024", location: "Neon Nights Club, Brickton", seat: "middle"});
+  const [cost, setCost] = useState({ticketCost: 0.01});
   
 
   useEffect(() => {
@@ -94,11 +95,11 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<RootLayout login={findAuthorizedAccount} contract={contract}/>}>
+        <Route element={<RootLayout login={findAuthorizedAccount} contract={contract} contractAdd={contractAdd}/>}>
           <Route path="/" element={<HomePage />} />
           {/*  user event pages  */}
           <Route path="/events" element={<EventsPage event={setEvent}/>} />
-          <Route path="/book-event" element={<BookEvent event={event} contract={contract} setEvent={setEvent}/>} />
+          <Route path="/book-event" element={<BookEvent event={event} contract={contract} setEvent={setEvent} cost={cost}/>} />
           <Route path="/book/ticket" element={<BookedTicket event={event} account={account}/>} />
           {/*  verification  ticket pages  */}
           <Route path="/verify-event" element={<VerifyTicketEventPage contract={contract} setTicket={setTicket}/>} />

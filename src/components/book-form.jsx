@@ -23,6 +23,7 @@ import { z } from "zod";
 
 import BookImageSvg from "@/components/book-image-svg";
 import { useNavigate } from "react-router-dom";
+import { ethers } from "ethers";
 
 
 const formSchema = z.object({
@@ -38,10 +39,6 @@ const BookForm = (props) => {
   const [isSubmitting, setSubmit] = useState(false);
   // Define your form.
 
-
-
-
-
   const [seatPosition, setSeatPosition] = useState("middle");
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -51,16 +48,25 @@ const BookForm = (props) => {
     },
   });
 
+    const stringToUnix = () => {
+        let dateString = props.event.time;
+        let _timeString = "T" + dateString.substring(0,5) + ":00";
+        let _dateString = dateString.substring(14,18) + "-" + dateString.substring(11,13) + "-" + dateString.substring(8,10);
+        const _date = new Date(_dateString + _timeString);
+        const _timestamp = _date.getTime()/1000;
+        return _timestamp;
+    }
+
   // Define a submit handler.
   async function onSubmit(values) {
-    setSubmit(true);
+      setSubmit(true);
+      let id = await props.contract.getTokenId();
     console.log(values);
     let _event = props.event;
-    await props.contract.mint(props.event.name, props.event.time, props.event.location, 1729690174, 0, 0, 1);
+    await props.contract.mint(props.event.name, props.event.time, props.event.location, values.seatPosition, stringToUnix(), 0, 0, 1, {value: ethers.parseEther(props.cost.ticketCost.toString())});
     console.log("NFT Minted");
-    let id = await props.contract.getTokenId();
     console.log(_event.name + " " + _event.time + " " + _event.location);
-    props.setEvent({tokenId: id, name: _event.name, time: _event.time, location: _event.location, seat: seatPosition});
+    props.setEvent({tokenId: Number(id), name: _event.name, time: _event.time, location: _event.location, seat: values.seatPosition});
     setSubmit(false);
     if(!isSubmitting)
         navigate("/book/ticket");
@@ -117,7 +123,7 @@ const BookForm = (props) => {
               </FormItem>
             )}
           />
-          <Button type="submit" onClick={mintTicket}>Submit</Button>
+          <Button type="submit">Submit | {props.cost.ticketCost} ETH</Button>
         </form>
       </Form>
       <BookImageSvg seatPosition={seatPosition} />

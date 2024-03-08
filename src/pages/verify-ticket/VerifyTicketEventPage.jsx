@@ -23,6 +23,7 @@ import { z } from "zod";
 
 import BookImageSvg from "@/components/book-image-svg";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
     tokenId: z.coerce
@@ -34,6 +35,7 @@ const formSchema = z.object({
 const VerifyTicketEventPage = (props) => {
 
     const navigate = useNavigate();
+    const { toast } = useToast();
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -53,6 +55,11 @@ const VerifyTicketEventPage = (props) => {
             navigate("/verify-ticket");
         }
     } catch (error){
+        toast({
+            variant: "destructive",
+            title: "Not Valid",
+            description: "User does not own this token ID",
+          });
         console.log("Verify Error");
     }
     
@@ -61,7 +68,7 @@ const VerifyTicketEventPage = (props) => {
 
 
   return (
-    <div className="min-h-screen mt-16 md:w-1/2 mx-auto    ">
+    <div className="min-h-screen mt-16 pt-32 md:w-1/2 mx-auto    ">
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

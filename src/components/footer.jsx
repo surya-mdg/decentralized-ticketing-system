@@ -1,10 +1,11 @@
 import { siteConfig } from "@/utils/site-config";
+//import { prependOnceListener } from "process";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <footer className="footer footer-center p-4  border-t-2  pb-10 mt-8 ">
       <aside>
-        <p>Copyright © 2024 - All right reserved by {siteConfig.name} </p>
+        <p>Contract Address: {props.contractAdd}</p>
       </aside>
     </footer>
   );

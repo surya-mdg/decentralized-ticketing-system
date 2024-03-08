@@ -55,7 +55,7 @@ const CheckTicket = (props) => {
 
 
   return (
-    <div className="min-h-screen mt-16 md:w-1/2 mx-auto    ">
+    <div className="min-h-screen mt-16 pt-40 md:w-1/2 mx-auto    ">
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField

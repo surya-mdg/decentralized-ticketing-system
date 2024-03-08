@@ -9,7 +9,7 @@ const RootLayout = (props) => {
       <main className="  min-h-screen">
         <Outlet />
       </main>
-      <Footer />
+      <Footer contractAdd={props.contractAdd}/>
     </div>
   );
 };

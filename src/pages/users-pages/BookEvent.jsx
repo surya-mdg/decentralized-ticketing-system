@@ -11,13 +11,13 @@ const BookEvent = (props) => {
             <div className="  w-14 h-14 bg-primary/50 rounded-full items-center mr-5 text-center flex justify-center ">
               <ImageIcon className="w-7 h-7  " />
             </div>
-            event title
+            {props.event.name}
           </div>
-          <div className=" text-muted-foreground ">Time & Location </div>
+          <div className=" text-muted-foreground ">{props.event.time}   { ' | ' }  {props.event.location} </div>
         </div>
         <Separator className=" bg-muted h-0.5" />
       </div>
-      <BookEventComponent event={props.event} contract={props.contract} setEvent={props.setEvent}/>
+      <BookEventComponent event={props.event} contract={props.contract} setEvent={props.setEvent} cost={props.cost}/>
     </>
   );
 };
